@@ -11,12 +11,18 @@ const ThemeContext = createContext<undefined | ThemeContextType>(undefined);
 const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [mode, setMode] = useState("");
   const handleThemeChange = () => {
-    if (mode === "dark") {
+    if (
+      localStorage.getItem("theme") === "dark" ||
+      (!localStorage.getItem("theme") &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      setMode("dark");
+      document.documentElement.classList.remove("light");
+      document.documentElement.classList.add("dark");
+    } else {
       setMode("light");
       document.documentElement.classList.add("light");
-    } else {
-      setMode("dark");
-      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("dark");
     }
   };
 
