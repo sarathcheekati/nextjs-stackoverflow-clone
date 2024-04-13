@@ -3,19 +3,19 @@ import Link from "next/link";
 import RenderTag from "../Tag/RenderTag";
 
 const hotQuestions = [
-  { _id: 1, title: "How do i use express as a custom server in next js" },
-  { _id: 2, title: "cascading delete in sql schema" },
-  { _id: 3, title: "How do i use express as a custom server in next js" },
-  { _id: 4, title: "How do i use express as a custom server in next js" },
-  { _id: 5, title: "How do i use express as a custom server in next js" },
+  { _id: "1", title: "How do i use express as a custom server in next js" },
+  { _id: "2", title: "cascading delete in sql schema" },
+  { _id: "3", title: "How do i use express as a custom server in next js" },
+  { _id: "4", title: "How do i use express as a custom server in next js" },
+  { _id: "5", title: "How do i use express as a custom server in next js" },
 ];
 
 const popularTags = [
-  { _id: 1, name: "Javascript", totalQuestions: 5 },
-  { _id: 2, name: "React", totalQuestions: 2 },
-  { _id: 3, name: "Node", totalQuestions: 3 },
-  { _id: 4, name: "HTML", totalQuestions: 4 },
-  { _id: 5, name: "Next JS", totalQuestions: 6 },
+  { _id: "1", name: "Javascript", totalQuestions: 5 },
+  { _id: "2", name: "React", totalQuestions: 2 },
+  { _id: "3", name: "Node", totalQuestions: 3 },
+  { _id: "4", name: "HTML", totalQuestions: 4 },
+  { _id: "5", name: "Next JS", totalQuestions: 6 },
 ];
 
 const RightSidebar = () => {
