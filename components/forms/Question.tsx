@@ -19,6 +19,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { QuestionsSchema } from "@/lib/validations";
 import { Badge } from "../ui/badge";
+import { createQuestion } from "@/lib/actions/Question.action";
 
 const type: any = "create";
 
@@ -35,9 +36,10 @@ const Question = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof QuestionsSchema>) {
+  async function onSubmit(values: z.infer<typeof QuestionsSchema>) {
     setIsSubmitting(true);
     try {
+      await createQuestion({});
     } catch (error) {
     } finally {
       setIsSubmitting(false);
@@ -113,6 +115,7 @@ const Question = () => {
                 Detailed Explanation of your problem
                 <span className="text-primary-500">*</span>
               </FormLabel>
+
               <FormControl className="mt-3.5">
                 <Editor
                   apiKey={process.env.NEXT_PUBLIC_TINY_MCE_API_KEY}
@@ -120,6 +123,8 @@ const Question = () => {
                     // @ts-ignore
                     editorRef.current = editor;
                   }}
+                  onBlur={field.onBlur}
+                  onEditorChange={(content, editor) => field.onChange(content)}
                   initialValue=""
                   init={{
                     height: 250,
