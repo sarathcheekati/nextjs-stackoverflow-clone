@@ -5,98 +5,12 @@ import NoResult from "@/components/shared/NoResult/NoResult";
 import LocalSearchbar from "@/components/shared/Search/LocalSearchbar";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
+import { getQuestions } from "@/lib/actions/Question.action";
 import Link from "next/link";
 
-const questions = [
-  {
-    _id: "1",
-    title: "How to optimize React component rendering?",
-    tags: [
-      { _id: "1", name: "React" },
-      { _id: "2", name: "Performance" },
-    ],
-    author: {
-      _id: "1",
-      name: "John Doe",
-      picture: "https://example.com/john_doe.jpg",
-    },
-    upvotes: 20,
-    views: 150,
-    answers: [],
-    createdAt: new Date("2024-04-13T08:00:00.000Z"),
-  },
-  {
-    _id: "2",
-    title: "Best practices for securing Node.js applications?",
-    tags: [
-      { _id: "3", name: "Node.js" },
-      { _id: "4", name: "Security" },
-    ],
-    author: {
-      _id: "2",
-      name: "Jane Smith",
-      picture: "https://example.com/jane_smith.jpg",
-    },
-    upvotes: 15,
-    views: 120,
-    answers: [],
-    createdAt: new Date("2024-04-13T08:00:00.000Z"),
-  },
-  {
-    _id: "3",
-    title: "How to deploy a React app on AWS?",
-    tags: [
-      { _id: "1", name: "React" },
-      { _id: "5", name: "AWS" },
-    ],
-    author: {
-      _id: "3",
-      name: "Alice Johnson",
-      picture: "https://example.com/alice_johnson.jpg",
-    },
-    upvotes: 250000000,
-    views: 18000,
-    answers: [],
-    createdAt: new Date("2024-04-11T15:45:00.000Z"),
-  },
-  {
-    _id: "4",
-    title: "How to implement authentication in a Next.js app?",
-    tags: [
-      { _id: "1", name: "React" },
-      { _id: "6", name: "Next.js" },
-      { _id: "4", name: "Security" },
-    ],
-    author: {
-      _id: "4",
-      name: "Michael Brown",
-      picture: "https://example.com/michael_brown.jpg",
-    },
-    upvotes: 18,
-    views: 130,
-    answers: [],
-    createdAt: new Date("2024-04-10T12:15:00.000Z"),
-  },
-  {
-    _id: "5",
-    title: "How to handle state management in a large React application?",
-    tags: [
-      { _id: "1", name: "React" },
-      { _id: "7", name: "State Management" },
-    ],
-    author: {
-      _id: "5",
-      name: "Emily Wilson",
-      picture: "https://example.com/emily_wilson.jpg",
-    },
-    upvotes: 22,
-    views: 160,
-    answers: [],
-    createdAt: new Date("2024-04-09T09:20:00.000Z"),
-  },
-];
+export default async function Home() {
+  const { questions } = await getQuestions({});
 
-export default function Home() {
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -124,7 +38,7 @@ export default function Home() {
       <HomeFilters />
       <div className="flex w-full flex-col mt-10 gap-6">
         {questions.length > 0 ? (
-          questions.map((question) => (
+          questions?.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}
