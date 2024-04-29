@@ -56,3 +56,9 @@ export function formatNumber(number: number): string {
   const formattedNumber = Math.floor(number / divisor) + suffix;
   return formattedNumber;
 }
+
+export function getJoinedDate(date: Date): string {
+  const month = date.toLocaleString("default", { month: "long" });
+  const year = date.getFullYear();
+  return `${month} ${year}`;
+}
