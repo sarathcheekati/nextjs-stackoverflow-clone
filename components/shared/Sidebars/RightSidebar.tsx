@@ -1,14 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import RenderTag from "../Tag/RenderTag";
-
-const hotQuestions = [
-  { _id: "1", title: "How do i use express as a custom server in next js" },
-  { _id: "2", title: "cascading delete in sql schema" },
-  { _id: "3", title: "How do i use express as a custom server in next js" },
-  { _id: "4", title: "How do i use express as a custom server in next js" },
-  { _id: "5", title: "How do i use express as a custom server in next js" },
-];
+import { getHotQuestions } from "@/lib/actions/Question.action";
+import { getTopPopularTags } from "@/lib/actions/Tag.actions";
 
 const popularTags = [
   { _id: "1", name: "Javascript", totalQuestions: 5 },
@@ -18,7 +12,9 @@ const popularTags = [
   { _id: "5", name: "Next JS", totalQuestions: 6 },
 ];
 
-const RightSidebar = () => {
+const RightSidebar = async () => {
+  const { hotQuestions } = await getHotQuestions();
+  const { popularTags } = await getTopPopularTags();
   return (
     <section className="sticky background-light900_dark200 light-border right-0 top-0 flex flex-col overflow-y-auto h-screen border-l p-6 pt-36 shadow-light-300 dark:shadow-none max-xl:hidden w-[350px] custom-scrollbar">
       <div>
@@ -26,7 +22,7 @@ const RightSidebar = () => {
         <div className="mt-7 flex w-full flex-col gap-[30px]">
           {hotQuestions.map((question) => (
             <Link
-              href={`/questions/${question._id}`}
+              href={`/question/${question._id}`}
               key={question._id}
               className="flex cursor-pointer items-center justify-between gap-7"
             >
