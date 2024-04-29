@@ -4,14 +4,6 @@ import RenderTag from "../Tag/RenderTag";
 import { getHotQuestions } from "@/lib/actions/Question.action";
 import { getTopPopularTags } from "@/lib/actions/Tag.actions";
 
-const popularTags = [
-  { _id: "1", name: "Javascript", totalQuestions: 5 },
-  { _id: "2", name: "React", totalQuestions: 2 },
-  { _id: "3", name: "Node", totalQuestions: 3 },
-  { _id: "4", name: "HTML", totalQuestions: 4 },
-  { _id: "5", name: "Next JS", totalQuestions: 6 },
-];
-
 const RightSidebar = async () => {
   const { hotQuestions } = await getHotQuestions();
   const { popularTags } = await getTopPopularTags();
@@ -48,7 +40,7 @@ const RightSidebar = async () => {
               key={tag._id}
               _id={tag._id}
               name={tag.name}
-              totalQuestions={tag.totalQuestions}
+              totalQuestions={tag.numberOfQuestions}
               showCount
             />
           ))}
