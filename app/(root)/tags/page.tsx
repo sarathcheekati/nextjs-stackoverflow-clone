@@ -5,9 +5,10 @@ import Filter from "@/components/shared/Filters/Filter";
 import NoResult from "@/components/shared/NoResult/NoResult";
 import { getAllTags } from "@/lib/actions/Tag.actions";
 import Link from "next/link";
+import { SearchParamsProps } from "@/types";
 
-const Page = async () => {
-  const { tags } = await getAllTags({});
+const Page = async ({ searchParams }: SearchParamsProps) => {
+  const { tags } = await getAllTags({ searchQuery: searchParams.q });
 
   return (
     <>
