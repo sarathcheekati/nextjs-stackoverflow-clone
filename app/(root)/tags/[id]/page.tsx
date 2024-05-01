@@ -1,14 +1,15 @@
 import QuestionCard from "@/components/Cards/QuestionCard";
 import NoResult from "@/components/shared/NoResult/NoResult";
+import Pagination from "@/components/shared/Pagination/Pagination";
 import LocalSearchbar from "@/components/shared/Search/LocalSearchbar";
 import { IQuestion } from "@/database/question.model";
 import { getQuestionsByTagId } from "@/lib/actions/Tag.actions";
 import { URLProps } from "@/types";
 
 const Page = async ({ params, searchParams }: URLProps) => {
-  const { questions, tagTitle } = await getQuestionsByTagId({
+  const { questions, tagTitle, isNext } = await getQuestionsByTagId({
     tagId: params?.id,
-    page: 1,
+    page: searchParams?.page ? +searchParams.page : 1,
     searchQuery: searchParams.q,
   });
   return (
@@ -50,6 +51,12 @@ const Page = async ({ params, searchParams }: URLProps) => {
         from. Get Involved! 💡"
           />
         )}
+      </div>
+      <div className="mt-10">
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams.page : 1}
+          isNext={isNext}
+        />
       </div>
     </>
   );
