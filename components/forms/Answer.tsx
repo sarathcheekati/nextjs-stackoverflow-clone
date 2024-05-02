@@ -27,6 +27,7 @@ interface Props {
 const Answer = ({ question, questionId, authorId }: Props) => {
   const pathname = usePathname();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmittingAI, setIsSubmittingAI] = useState(false);
   const { mode } = useTheme();
   const editorRef = useRef(null);
   const form = useForm<z.infer<typeof AnswersSchema>>({
@@ -59,6 +60,26 @@ const Answer = ({ question, questionId, authorId }: Props) => {
     }
   };
 
+  const generateAIAnswer = async () => {
+    if (!authorId) return;
+    setIsSubmittingAI(true);
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/chatgpt`,
+        {
+          method: "POST",
+          body: JSON.stringify({ question }),
+        }
+      );
+      const aiAnswer = await response.json();
+    } catch (error) {
+      console.log(error);
+      throw error;
+    } finally {
+      setIsSubmittingAI(false);
+    }
+  };
+
   return (
     <div>
       <div className="flex flex-col justify-between gap-5 sm:flex-row sm:gap-5 sm:items-center">
@@ -76,7 +97,7 @@ const Answer = ({ question, questionId, authorId }: Props) => {
             height={12}
             className="object-contain"
           />
-          Generate an Ai Answer
+          Generate Ai Answer
         </Button>
       </div>
       <Form {...form}>

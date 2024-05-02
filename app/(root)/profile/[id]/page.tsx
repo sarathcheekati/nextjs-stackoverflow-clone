@@ -12,13 +12,15 @@ import ProfileLink from "@/components/shared/ProfileLink/ProfileLink";
 import Stats from "@/components/shared/Stats/Stats";
 import QuestionsTab from "@/components/shared/QuestionsTab/QuestionsTab";
 import AnswersTab from "@/components/shared/AnswersTab/AnswersTab";
+import { userInfo } from "os";
 
 const Page = async ({ params, searchParams }: URLProps) => {
   const { userId: clerkId } = auth();
 
-  const { user, totalQuestions, totalAnswers } = await getUserInfo({
-    userId: params?.id,
-  });
+  const { user, totalQuestions, totalAnswers, badgeCount, reputation } =
+    await getUserInfo({
+      userId: params?.id,
+    });
   return (
     <>
       <div className="flex flex-col-reverse items-start justify-between sm:flex-row">
@@ -73,7 +75,12 @@ const Page = async ({ params, searchParams }: URLProps) => {
           </SignedIn>
         </div>
       </div>
-      <Stats totalQuestions={totalQuestions} totalAnswers={totalAnswers} />
+      <Stats
+        reputation={reputation}
+        badges={badgeCount}
+        totalQuestions={totalQuestions}
+        totalAnswers={totalAnswers}
+      />
       <div className="mt-10 flex gap-10">
         <Tabs defaultValue="top-posts" className="flex-1">
           <TabsList className="background-light800_dark400 min-h-[42px] p-1">
