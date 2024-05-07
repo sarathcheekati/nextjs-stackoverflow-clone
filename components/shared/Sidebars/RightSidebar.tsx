@@ -5,14 +5,16 @@ import { getHotQuestions } from "@/lib/actions/Question.action";
 import { getTopPopularTags } from "@/lib/actions/Tag.actions";
 
 const RightSidebar = async () => {
+  //@ts-ignore
   const { hotQuestions } = await getHotQuestions();
+  //@ts-ignore
   const { popularTags } = await getTopPopularTags();
   return (
     <section className="sticky background-light900_dark200 light-border right-0 top-0 flex flex-col overflow-y-auto h-screen border-l p-6 pt-36 shadow-light-300 dark:shadow-none max-xl:hidden w-[350px] custom-scrollbar">
       <div>
         <h3 className="h3-bold text-dark200_light900">Top Questions</h3>
         <div className="mt-7 flex w-full flex-col gap-[30px]">
-          {hotQuestions.map((question) => (
+          {hotQuestions.map((question: any) => (
             <Link
               href={`/question/${question._id}`}
               key={question._id}
