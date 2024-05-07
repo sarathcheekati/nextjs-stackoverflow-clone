@@ -1,5 +1,5 @@
 import LocalSearchbar from "@/components/shared/Search/LocalSearchbar";
-import { TagFilters, UserFilters } from "@/constants/filters";
+import { TagFilters } from "@/constants/filters";
 import Filter from "@/components/shared/Filters/Filter";
 
 import NoResult from "@/components/shared/NoResult/NoResult";
