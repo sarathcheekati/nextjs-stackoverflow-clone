@@ -60,26 +60,6 @@ const Answer = ({ question, questionId, authorId }: Props) => {
     }
   };
 
-  const generateAIAnswer = async () => {
-    if (!authorId) return;
-    setIsSubmittingAI(true);
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/chatgpt`,
-        {
-          method: "POST",
-          body: JSON.stringify({ question }),
-        }
-      );
-      const aiAnswer = await response.json();
-    } catch (error) {
-      console.log(error);
-      throw error;
-    } finally {
-      setIsSubmittingAI(false);
-    }
-  };
-
   return (
     <div>
       <div className="flex flex-col justify-between gap-5 sm:flex-row sm:gap-5 sm:items-center">
